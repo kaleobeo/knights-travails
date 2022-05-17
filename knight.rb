@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Class that manages calculation of the path between nodes
 class Knight
   attr_accessor :board
 
@@ -8,6 +9,7 @@ class Knight
   end
 
   def knight_moves(start, finish, queue = [])
+    # converts start and finish to Square objects if they are arrays
     start = board.at(start) if start.is_a?(Array)
     finish = board.at(finish) if finish.is_a?(Array)
 
@@ -23,6 +25,7 @@ class Knight
   end
 
   def enqueue_neighbors(root, queue)
+    # Iterates over nodes that have not been visited, and adds the path to get to the ones that haven't
     discovered_nodes = root.neighbor_nodes.filter { |node| !node.visited? }
     discovered_nodes.each do |node|
       node.path = root.path + node.path
